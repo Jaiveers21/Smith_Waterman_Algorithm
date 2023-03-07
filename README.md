@@ -1,4 +1,4 @@
-# Smith_Waterman_Algorithm
+# Smith-Waterman Algorithm
 This is an implementation of the Smith-Waterman local alignment algorithm for protein sequences. 
 
 To install the package, pip can be used:
