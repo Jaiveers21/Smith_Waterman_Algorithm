@@ -1,7 +1,7 @@
 # Smith_Waterman_Algorithm
 This is an implementation of the Smith_Waterman local alignment algorithm for protein sequences. 
 
-** Installation**
+**Installation**
 
 ```python3 -m pip install git+https://github.com/jaiveers21/Smith_Waterman_Algorithm.git```
 
