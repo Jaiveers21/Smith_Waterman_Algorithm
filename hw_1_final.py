@@ -11,8 +11,8 @@ __version__ = "1.0.0"
 
 import argparse
 import numpy as np
-from enum import IntEnum
 import pandas as pd
+from enum import IntEnum
 
 ### This is one way to read in arguments in Python. 
 parser = argparse.ArgumentParser(description='Smith-Waterman Algorithm')
@@ -22,7 +22,7 @@ parser.add_argument('-o', '--opengap', help='open gap', required=False, default=
 parser.add_argument('-e', '--extgap', help='extension gap', required=False, default=-1)
 args = parser.parse_args()
 
-#Create a class that is useful for connducting traceback
+#Create a class that is useful for conducting traceback
 class Trace(IntEnum):
     STOP=0
     LEFT=1
@@ -87,7 +87,7 @@ def running_smith_waterman(openGap, extGap, seq1, seq2, blosum, score_matrix):
             for val in range(1, j+1):
                 left_penalty.append(score_matrix[i][val]+openGap+(j-val-1)*extGap)
             left = max(left_penalty)
-            #Determine the score based on the max of 0 and the diagonal, up, left values
+            #Determine the score based on the max of 0 and the diagonal, up, and left values
             score_matrix[i][j]=max(
                 0,
                 diag,
