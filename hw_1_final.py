@@ -44,7 +44,7 @@ def loading_from_blosum_txt(scoreFile):
                     blosum[blosum_ind-1][blosum_l_n-1] = int(blosum_num)
     return blosum
 
-#This function matches the amino acids with their corresponding similarity score from the Blosum matrix
+#This function matches the amino acids with their corresponding similarity score from the blosum matrix
 def finding_similarity_score_value(aa1, aa2, blosum_matrix):
     #Creating a dictionary that represents which amino acids are paired with which indices
     str1 = "A, B, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, X, Y, Z"
@@ -78,17 +78,17 @@ def running_smith_waterman(openGap, extGap, seq1, seq2, blosum, score_matrix):
         for j in range(1, len(seq2)+1):
             #Look at the diagonal and add the value based on the blosum matrix
             blosum_score = finding_similarity_score_value(seq2[j-1], seq1[i-1], blosum)
-            diag = score_matrix[i-1][j-1] + blosum_score
+            diag=score_matrix[i-1][j-1]+blosum_score
             #Look up and add the gaps (based on the open gap penalty and the gap extension penalties)
             for val in range(1, i+1):
-                up_penalty.append(score_matrix[val][j] + openGap + (i-val-1)*extGap)
+                up_penalty.append(score_matrix[val][j]+openGap+(i-val-1)*extGap)
             up = max(up_penalty)
             #Look left and add the gaps (based on the open gap penalty and the gap extension penalties)
-            for val in range(1, j + 1):
-                left_penalty.append(score_matrix[i][val] + openGap + (j-val-1)*extGap)
+            for val in range(1, j+1):
+                left_penalty.append(score_matrix[i][val]+openGap+(j-val-1)*extGap)
             left = max(left_penalty)
             #Determine the score based on the max of 0 and the diagonal, up, left values
-            score_matrix[i][j] = max(
+            score_matrix[i][j]=max(
                 0,
                 diag,
                 up,
@@ -106,20 +106,21 @@ def running_smith_waterman(openGap, extGap, seq1, seq2, blosum, score_matrix):
             left_penalty = []
     
     sequnce_1_aligned, sequence_2_aligned = traceback(optimal_matrix, index_highest_score, seq1, seq2)
+
     return formatting_for_output(seq1, seq2, sequnce_1_aligned, sequence_2_aligned, index_highest_score)
 
 #Based on the value that was assigned to the position, this function stores the move as diagonal, up, or left. Traceback stops if the value is 0. 
-def traceback_prep(matrix, optimal_matrix, i, j, diag, left, up):
-        if matrix[i][j]==0:
+def traceback_prep(score_matrix, optimal_matrix, i, j, diag, left, up):
+        if score_matrix[i][j]==0:
             optimal_matrix[i][j]=Trace.STOP
 
-        elif matrix[i][j]==diag:
+        elif score_matrix[i][j]==diag:
             optimal_matrix[i][j]=Trace.DIAGONAL
 
-        elif matrix[i][j]==left:
+        elif score_matrix[i][j]==left:
             optimal_matrix[i][j]=Trace.LEFT
 
-        elif matrix[i][j]==up:
+        elif score_matrix[i][j]==up:
             optimal_matrix[i][j]=Trace.UP
 
 #This function takes the two aligned sequences after traceback and formats the alignment to resemble the output shown in the sample text files
@@ -202,10 +203,9 @@ def traceback(optimal_matrix, index_highest_score, s1, s2):
         aligned_sequence1+=working_sequence1
         aligned_sequence2+=working_sequence2
 
-    # reverse the sequences
+    #Flip the sequences
     aligned_sequence1 = aligned_sequence1[::-1]
     aligned_sequence2 = aligned_sequence2[::-1]
-
     return aligned_sequence1, aligned_sequence2
 
 ### Implement your Smith-Waterman Algorithm
@@ -217,8 +217,8 @@ def runSW(inputFile, scoreFile, openGap, extGap):
         s1 = lines[0]
         s2 = lines[1]
 
-        print("sequence1\n" + s1, file = f) #print sequence 1
-        print("sequence2\n" + s2, file = f) #print sequence 2
+        print("sequence1\n" + s1, file = f) #Print sequence 1 (as shown in the sample output file)
+        print("sequence2\n" + s2, file = f) #Print sequence 2 (as shown in the sample output file)
 
         #Create and initialize the score matrix with column and row of 0s
         score_matrix = np.zeros((len(s1) + 1, len(s2) + 1), dtype=int)
@@ -226,17 +226,17 @@ def runSW(inputFile, scoreFile, openGap, extGap):
         blosum = loading_from_blosum_txt(scoreFile)
         alignment1, string_compared, alignment2 = running_smith_waterman(openGap, extGap, s1, s2, blosum, score_matrix)
 
-        #This function takes the calculated score matrix and formats it again in tab-delimited format (as shown in the output file)
+        #This function takes the calculated score matrix and formats it again in tab-delimited format (as shown in the sample output file)
         print("--------------\n|Score Matrix|\n--------------", file = f)
         seq1 = ' '+s1[:]
         seq2 = ' '+s2[:]
         df = pd.DataFrame(score_matrix.T, index = list(seq2), columns = list(seq1))
         print(df.to_csv(sep = '\t'), file = f, end = "")
 
-        #Output the higest score and the alignment (as shown in the output file)
+        #Output the higest score and the alignment (as shown in the sample output file)
         highest_score = np.amax(score_matrix)
         print("----------------------\n|Best Local Alignment|\n----------------------", file=f)
-        print("Alignment Score:" + str(highest_score), file=f) #the alignment score is the maximum score in the matrix
+        print("Alignment Score:" + str(highest_score), file=f) #The alignment score is the maximum score in the matrix
         print("Alignment Results:", file=f)
         print(alignment1, file=f)
         print(string_compared, file=f)
