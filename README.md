@@ -151,3 +151,5 @@ MGLSDGEWQL(VLNVWGKVEADIPGHGQEVLIRLFKGHPETLEK-FDKF---KHLKSEDEMKASED--LKKHGATVLTAL
            ||  ||  |||   ||  || |||  ||||| | | ||    |    |   |  |     ||||||  ||  ||  | | |  |||  |||||||||     |  | |  |  |   |  |                                 
           (VLKCWGPMEADYATHGGLVLTRLFTEHPETL-KLFPKFAGIAH--G-D-L-AG-DAGVSAHGATVLNKLGDLLKARGAHAALLKPLSSSHATKHKIPI--INFKLIAE-VIGKVMEEK-AG)                                
 ```
+Some references used include:
+https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm#Comparison_with_the_Needleman%E2%80%93Wunsch_algorithm
