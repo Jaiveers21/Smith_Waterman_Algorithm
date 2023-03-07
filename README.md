@@ -1,18 +1,23 @@
 # Smith_Waterman_Algorithm
-This is an implementation of the Smith_Waterman local alignment algorithm for protein sequences. 
+This is an implementation of the Smith-Waterman local alignment algorithm for protein sequences. 
 
-**Installation**
+To install the package, pip can be used:
 
 ```python3 -m pip install git+https://github.com/jaiveers21/Smith_Waterman_Algorithm.git```
 
 The needed input file is input.txt. An output.txt file will be generated. 
 
-**Example Input**
+The lines for executing the code are:
 
-```Usage: python hw_1_final.py -i <input file> -s <score file>```
-```Example: python hw_1_final.py -i sample-input1.txt -s blosum62.txt```
+Usage: ```python hw_1_final.py -i <input file> -s <score file>```
+Example: ```python hw_1_final.py -i sample-input1.txt -s blosum62.txt```
 
-**Example Output**
+An example of input (sample-input1.txt):
+```
+MGLSDGEWQLVLNVWGKVEADIPGHGQEVLIRLFKGHPETLEKFDKFKHLKSEDEMKASEDLKKHGATVLTALGGILKKKGHHEAEIKPLAQSHATKHKIPVKYLEFISECIIQVLQSKHPGDFGADAQGAMNKALELFRKDMASNYKELGFQG
+VLKCWGPMEADYATHGGLVLTRLFTEHPETLKLFPKFAGIAHGDLAGDAGVSAHGATVLNKLGDLLKARGAHAALLKPLSSSHATKHKIPIINFKLIAEVIGKVMEEKAG
+```
+An example of the output:
 
 ```
 -----------
