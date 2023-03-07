@@ -3,7 +3,7 @@ This is an implementation of the Smith_Waterman local alignment algorithm for pr
 
 ** Installation**
 
-```python3 -m pip install git+https://github.com/jaiveers21/Smith_waterman_algorithm.git```
+```python3 -m pip install git+https://github.com/jaiveers21/Smith_Waterman_Algorithm.git```
 
 The needed input file is input.txt. An output.txt file will be generated. 
 
